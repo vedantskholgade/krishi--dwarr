@@ -1,0 +1,512 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krishi-Dwaar | UI Interface Showcase </title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #0b1120;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.10) 0px, transparent 50%);
+    }
+
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    
+    .phone-mockup {
+      width: 390px;
+      height: 800px;
+      background: #020617;
+      border-radius: 52px;
+      border: 10px solid #1e293b;
+      box-shadow: 
+        0 0 0 2px #334155,
+        0 25px 60px -15px rgba(0, 0, 0, 0.9),
+        0 0 40px rgba(16, 185, 129, 0.2);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+   
+    .phone-island {
+      width: 120px;
+      height: 28px;
+      background: #020617;
+      border-radius: 20px;
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 12px;
+    }
+    .phone-lens {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #0f172a;
+      border: 1.5px solid #1e293b;
+    }
+
+    /* Glossy glass reflection */
+    .phone-mockup::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 45;
+    }
+
+    /* Subtle glow for the live token card */
+    .token-glow {
+      box-shadow: 0 0 35px rgba(5, 150, 105, 0.25);
+    }
+  </style>
+</head>
+<body class="min-h-screen text-slate-100 flex flex-col items-center justify-center p-4 sm:p-8">
+
+  <!-- Top Controls Bar for Screenshotting -->
+  <header class="w-full max-w-5xl mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-900/80 backdrop-blur-md p-4 rounded-2xl border border-slate-800">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center text-white font-black text-base shadow-lg shadow-emerald-900/40">
+        KD
+      </div>
+      <div>
+        <h1 class="text-sm font-bold text-white flex items-center gap-2">
+          Krishi-Dwaar — Official App Interface
+          <span class="bg-emerald-500/20 text-emerald-400 text-[10px] px-2 py-0.5 rounded border border-emerald-500/30 font-mono"></span>
+        </h1>
+        <p class="text-xs text-slate-400">High-resolution mockup ready for your pitch deck screenshot</p>
+      </div>
+    </div>
+
+    <!-- View Switcher Tabs -->
+    <div class="flex items-center gap-1.5 bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs font-semibold">
+      <button onclick="switchView('mobile')" id="btn-view-mobile" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 text-white shadow transition">
+        📱 Mobile App (Slide 2)
+      </button>
+      <button onclick="switchView('desk')" id="btn-view-desk" class="px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition">
+        🖥️ Mandi Gate Desk
+      </button>
+      <button onclick="switchView('pass')" id="btn-view-pass" class="px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition">
+        🎫 Gate Pass Slip
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN PREVIEW CONTAINER -->
+  <main class="w-full max-w-5xl flex items-center justify-center">
+
+    
+    <div id="view-mobile" class="flex flex-col lg:flex-row items-center justify-center gap-10">
+      
+      <!-- Phone Frame -->
+      <div class="phone-mockup">
+        
+        <!-- Top Dynamic Island -->
+        <div class="phone-island">
+          <div class="phone-lens"></div>
+        </div>
+
+        <!-- Phone Status Bar -->
+        <div class="pt-3 px-7 pb-2 flex justify-between items-center text-xs font-mono text-slate-400 select-none z-40">
+          <span class="font-bold text-white text-[13px]">09:41</span>
+          <div class="flex items-center gap-2">
+            <span class="text-[11px] font-bold text-slate-200">5G</span>
+            <i data-lucide="wifi" class="w-3.5 h-3.5 text-white"></i>
+            <i data-lucide="battery-full" class="w-4 h-4 text-emerald-400"></i>
+          </div>
+        </div>
+
+        <!-- App Header (Matching Slide 2) -->
+        <div class="px-5 pt-3 pb-3 bg-slate-900/90 border-b border-slate-800/80 flex justify-between items-center z-40">
+          <div>
+            <div class="text-[13px] font-black tracking-wider text-white flex items-center gap-1.5">
+              KRISHI DWAAR
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            </div>
+            <div class="text-[10px] text-slate-400 font-medium">Government Procurement Portal</div>
+          </div>
+          <div class="text-right">
+            <span class="text-[10px] font-semibold text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-800/60 block">
+              Mandi: Surat APMC
+            </span>
+          </div>
+        </div>
+
+        <!-- Scrollable Mobile Body -->
+        <div class="flex-1 overflow-y-auto p-4 space-y-3.5 text-slate-200 z-40">
+          
+          <!-- Farmer Profile Bar (Slide 2: Ramesh Kumar) -->
+          <div class="flex items-center justify-between bg-slate-900/80 p-2.5 rounded-2xl border border-slate-800">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-xs shadow-md shadow-emerald-900">
+                K
+              </div>
+              <div>
+                <div class="text-xs font-bold text-white">Ramesh Kumar</div>
+                <div class="text-[10px] text-slate-400 font-mono">ID: KD-108-002</div>
+              </div>
+            </div>
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping mr-2"></span>
+          </div>
+
+          <!-- The Core Live Token Card (Slide 2: #KD-108) -->
+          <div class="bg-gradient-to-b from-slate-900 to-[#061e18] border-2 border-emerald-500/60 rounded-3xl p-4 token-glow relative overflow-hidden">
+            
+            <div class="flex justify-between items-center mb-1">
+              <span class="text-[10px] font-bold text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded-md border border-emerald-800/80 flex items-center gap-1 font-mono">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                • LIVE TOKEN
+              </span>
+              <span class="text-[10px] text-slate-400 font-mono">QR GATE PASS</span>
+            </div>
+
+            <!-- Big Token ID -->
+            <div class="text-4xl font-black font-mono text-white tracking-wider my-1">
+              #KD-108
+            </div>
+
+            <!-- Date & Time Window -->
+            <div class="text-xs font-bold text-emerald-300 font-mono mb-1">
+              SAT, 11:00 AM - 01:00 PM
+            </div>
+
+            <!-- Mandi Gate & Tractor Details -->
+            <div class="text-[11px] text-slate-300 font-mono pb-3 border-b border-emerald-900/60 flex justify-between">
+              <span>Mandi: 48, Gate: 4</span>
+              <span class="text-amber-300 font-bold">Tractor: GJ-05-112</span>
+            </div>
+
+            <!-- Gate 2 Live Status Sub-Box (Exact Slide 2) -->
+            <div class="mt-3 bg-black/40 rounded-2xl p-3 border border-emerald-900/60 space-y-2 text-xs">
+              <div class="flex justify-between items-center">
+                <span class="text-[11px] font-bold text-slate-200">Gate 2 Live Status</span>
+                <span class="text-[9px] font-black bg-emerald-500 text-slate-950 px-2 py-0.5 rounded uppercase tracking-wider">
+                  ACTIVE
+                </span>
+              </div>
+
+              <div class="space-y-1 text-[11px] text-slate-300">
+                <div class="flex justify-between">
+                  <span class="text-slate-400">Serving Token:</span>
+                  <span class="font-mono font-bold text-amber-400">#KD-104</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">Trucks in Queue:</span>
+                  <span class="font-mono font-bold text-white">3 Ahead</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-slate-400">Estimated Wait:</span>
+                  <span class="font-mono font-bold text-emerald-400">~24 mins</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Big Green CONFIRM GATE ARRIVAL Button -->
+            <div class="mt-3.5">
+              <div class="w-full bg-emerald-500 text-slate-950 font-extrabold py-3 px-4 rounded-2xl text-center shadow-lg shadow-emerald-500/40 select-none flex flex-col items-center justify-center cursor-pointer hover:bg-emerald-400 transition">
+                <div class="flex items-center gap-1.5 text-xs tracking-wider">
+                  <i data-lucide="shield-check" class="w-4 h-4"></i>
+                  CONFIRM GATE ARRIVAL
+                </div>
+                <div class="text-[10px] font-semibold text-slate-900 mt-0.5">
+                  GPS Verified • Live at Mandi
+                </div>
+                <div class="text-[9px] text-slate-800/90 font-normal">
+                  Tap to trigger gate arrival check-in
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Menu List (Exact Items from Slide 2) -->
+          <div class="bg-slate-900/60 rounded-2xl p-2 border border-slate-800/80 space-y-1 text-xs">
+            <div class="flex items-center justify-between p-2 rounded-xl bg-emerald-950/60 border border-emerald-800/60 text-emerald-300 font-bold">
+              <div class="flex items-center gap-2">
+                <i data-lucide="ticket" class="w-4 h-4 text-emerald-400"></i>
+                <span>Active Tokens</span>
+              </div>
+              <span class="text-[10px] font-mono bg-emerald-500/20 px-1.5 py-0.5 rounded">1 Active</span>
+            </div>
+
+            <div class="flex items-center justify-between p-2 rounded-xl hover:bg-slate-800/40 text-slate-300">
+              <div class="flex items-center gap-2">
+                <i data-lucide="calendar-plus" class="w-4 h-4 text-slate-400"></i>
+                <span>Book New Slot</span>
+              </div>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-500"></i>
+            </div>
+
+            <div class="flex items-center justify-between p-2 rounded-xl hover:bg-slate-800/40 text-slate-300">
+              <div class="flex items-center gap-2">
+                <i data-lucide="list-ordered" class="w-4 h-4 text-slate-400"></i>
+                <span>Live Mandi Queue</span>
+              </div>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-500"></i>
+            </div>
+
+            <div class="flex items-center justify-between p-2 rounded-xl hover:bg-slate-800/40 text-slate-300">
+              <div class="flex items-center gap-2">
+                <i data-lucide="scale" class="w-4 h-4 text-slate-400"></i>
+                <span>Weighment Slips</span>
+              </div>
+              <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-500"></i>
+            </div>
+
+            <div class="flex items-center justify-between p-2 rounded-xl hover:bg-slate-800/40 text-slate-300">
+              <div class="flex items-center gap-2">
+                <i data-lucide="globe" class="w-4 h-4 text-slate-400"></i>
+                <span>Language / Bhasha</span>
+              </div>
+              <span class="text-[10px] text-slate-400">हिन्दी / Eng</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Phone Home Indicator Bar -->
+        <div class="w-32 h-1 bg-slate-700 rounded-full mx-auto my-2 z-40"></div>
+
+      </div>
+
+      <!-- Right Description Callout (Explaining the pitch deck features) -->
+      <div class="max-w-md space-y-4 text-slate-300">
+        <div class="inline-block bg-emerald-500/20 text-emerald-400 text-xs font-mono font-bold px-3 py-1 rounded-full border border-emerald-500/40">
+          FEATURE HIGHLIGHTS (SLIDE 2)
+        </div>
+        
+        <h2 class="text-2xl font-black text-white leading-snug">
+          Krishi-Dwaar Unified Farmer Mobile Interface
+        </h2>
+
+        <p class="text-xs text-slate-400 leading-relaxed">
+          This is the exact UI screen displayed on Slide 2 of the presentation. It replaces chaotic 2-4 day roadside queues with a predictable, guaranteed 2-hour arrival window.
+        </p>
+
+        <div class="space-y-2.5 text-xs">
+          <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 flex items-start gap-3">
+            <i data-lucide="clock" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+            <div>
+              <strong class="text-white">Smart 2-Hour Slot Engine:</strong>
+              <p class="text-slate-400 text-[11px] mt-0.5">Farmer Ramesh Kumar is allocated <span class="text-white">SAT 11:00 AM - 01:00 PM</span> based on Surat APMC's real bay capacity.</p>
+            </div>
+          </div>
+
+          <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 flex items-start gap-3">
+            <i data-lucide="map-pin" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+            <div>
+              <strong class="text-white">GPS Geofence Arrival Check-In:</strong>
+              <p class="text-slate-400 text-[11px] mt-0.5">When the tractor is within 500m of Gate 2, the farmer taps to trigger automated check-in.</p>
+            </div>
+          </div>
+
+          <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 flex items-start gap-3">
+            <i data-lucide="eye" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+            <div>
+              <strong class="text-white">Live Queue Telemetry:</strong>
+              <p class="text-slate-400 text-[11px] mt-0.5">Shows currently serving vehicle <span class="text-amber-400 font-mono">#KD-104</span>, with only 3 trucks ahead (~24 mins wait).</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-2">
+          <span class="text-[11px] text-slate-500">📸 You can take a screenshot of this frame right now for your presentation pitch!</span>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- VIEW 2: MANDI OPERATOR DESK (SLIDE 3 REPLICA) -->
+    <div id="view-desk" class="w-full hidden">
+      <div class="bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-2xl max-w-4xl mx-auto">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5 mb-6">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold">
+              <i data-lucide="scale" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="text-lg font-bold text-white">Mandi Gate & Weighbridge Operator Desk</h3>
+              <p class="text-xs text-slate-400">Surat APMC #48 • Gate 2 Console (Slide 3 System Design)</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="bg-emerald-500/20 text-emerald-400 text-xs font-mono font-bold px-3 py-1 rounded-full border border-emerald-500/30">
+              BAY 3 SCALE ACTIVE
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Active Truck at Weighbridge -->
+          <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-3">
+            <span class="text-[10px] font-mono text-slate-400 uppercase">Currently at Weighbridge</span>
+            <div class="text-3xl font-black font-mono text-amber-400">Token #KD-104</div>
+            <div class="text-xs text-slate-300">Farmer: Suresh Patel • Tractor: GJ-05-AB-4011 • Crop: Cotton</div>
+
+            <div class="pt-3 border-t border-slate-800 space-y-2 text-xs font-mono">
+              <div class="flex justify-between text-slate-400">
+                <span>Loaded Gross Weight:</span>
+                <span class="font-bold text-white">9,450 KG</span>
+              </div>
+              <div class="flex justify-between text-slate-400">
+                <span>Empty Tare Weight:</span>
+                <span class="font-bold text-white">4,120 KG</span>
+              </div>
+              <div class="flex justify-between text-emerald-400 font-bold text-sm pt-1 border-t border-slate-800">
+                <span>Net Crop Weight:</span>
+                <span>5,330 KG (53.3 Qtl)</span>
+              </div>
+              <div class="flex justify-between text-amber-300 font-bold pt-1">
+                <span>Direct MSP Payout:</span>
+                <span>₹3,79,549</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Queue Control Panel -->
+          <div class="bg-slate-950 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-mono text-slate-400 uppercase">Next Inbound Queue (FIFO)</span>
+              <div class="space-y-2 mt-2 text-xs">
+                <div class="p-2.5 bg-slate-900 rounded-xl border border-slate-800 flex justify-between">
+                  <span class="font-mono font-bold text-white">#KD-105</span>
+                  <span class="text-slate-400">Hardik Singh (Mustard)</span>
+                  <span class="text-emerald-400 font-semibold">At Gate</span>
+                </div>
+                <div class="p-2.5 bg-slate-900 rounded-xl border border-slate-800 flex justify-between">
+                  <span class="font-mono font-bold text-white">#KD-106</span>
+                  <span class="text-slate-400">Anil Deshmukh (Soybean)</span>
+                  <span class="text-emerald-400 font-semibold">At Gate</span>
+                </div>
+                <div class="p-2.5 bg-emerald-950/60 rounded-xl border border-emerald-800 flex justify-between">
+                  <span class="font-mono font-bold text-emerald-300">#KD-108</span>
+                  <span class="text-slate-300">Ramesh Kumar (Wheat)</span>
+                  <span class="text-amber-400 font-semibold">Ready</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-800">
+              <div class="w-full bg-emerald-600 text-white font-bold py-3 rounded-xl text-xs text-center shadow-lg shadow-emerald-700/30">
+                1-CLICK CALL NEXT TRUCK & ISSUE WEIGHMENT SLIP
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- VIEW 3: E-MANDI GATE PASS SLIP -->
+    <div id="view-pass" class="w-full hidden">
+      <div class="bg-white text-slate-900 rounded-3xl p-6 sm:p-8 max-w-md mx-auto shadow-2xl border-2 border-dashed border-slate-300 font-mono">
+        
+        <div class="text-center border-b-2 border-dashed border-slate-300 pb-4 mb-4">
+          <div class="text-xs font-bold tracking-wider text-slate-500 uppercase">Government of India • e-NAM</div>
+          <h3 class="text-base font-black text-slate-900 mt-0.5">SURAT APMC MANDI GATE PASS</h3>
+          <p class="text-[11px] text-slate-600">e-National Agriculture Market Digital Slip</p>
+        </div>
+
+        <div class="bg-slate-100 p-3 rounded-xl text-center mb-4">
+          <div class="text-[10px] text-slate-500 uppercase">DIGITAL TOKEN NUMBER</div>
+          <div class="text-4xl font-black text-emerald-700 my-1">#KD-108</div>
+          <div class="text-xs font-bold text-slate-800">SAT, 11:00 AM - 01:00 PM</div>
+        </div>
+
+        <div class="space-y-1.5 text-xs border-b-2 border-dashed border-slate-300 pb-4 mb-4">
+          <div class="flex justify-between">
+            <span class="text-slate-500">Farmer Name:</span>
+            <span class="font-bold">Ramesh Kumar</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-500">Tractor No:</span>
+            <span class="font-bold">GJ-05-112</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-500">Crop Category:</span>
+            <span class="font-bold">Wheat (Sharbati)</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-500">Assigned Gate:</span>
+            <span class="font-bold text-emerald-700">Gate 2 • Bay 4</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-500">Govt. MSP Rate:</span>
+            <span class="font-bold">₹2,275 / Qtl</span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <div class="text-[10px] text-slate-500 space-y-0.5">
+            <p>✔ GPS Geofence Verified</p>
+            <p>✔ Direct Bank DBT Linked</p>
+            <p class="text-slate-800 font-bold">Helpline: 1800-180-1551</p>
+          </div>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=KRISHI-DWAAR-TOKEN-KD-108" alt="QR" class="w-16 h-16 rounded border border-slate-300 p-0.5">
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    function switchView(viewName) {
+      ['mobile', 'desk', 'pass'].forEach(v => {
+        const el = document.getElementById('view-' + v);
+        const btn = document.getElementById('btn-view-' + v);
+        if (el) el.classList.add('hidden');
+        if (btn) {
+          btn.classList.remove('bg-emerald-600', 'text-white', 'shadow');
+          btn.classList.add('text-slate-400');
+        }
+      });
+
+      const activeEl = document.getElementById('view-' + viewName);
+      const activeBtn = document.getElementById('btn-view-' + viewName);
+      if (activeEl) activeEl.classList.remove('hidden');
+      if (activeBtn) {
+        activeBtn.classList.add('bg-emerald-600', 'text-white', 'shadow');
+        activeBtn.classList.remove('text-slate-400');
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
+```
